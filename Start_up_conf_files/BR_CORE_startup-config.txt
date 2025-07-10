@@ -1,0 +1,111 @@
+!
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname BR_CORE
+!
+enable secret 5 $1$mERr$5IwLxKPTwbGXkWHIV7w4P0
+!
+!
+!
+ip domain-name branch_office.local
+!
+username admin secret 5 $1$mERr$5IwLxKPTwbGXkWHIV7w4P0
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+spanning-tree vlan 1,10,15,20,30,99 priority 0
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+ switchport trunk native vlan 99
+ spanning-tree vlan 30 cost 3
+!
+interface FastEthernet0/21
+ switchport trunk native vlan 99
+ spanning-tree vlan 20 cost 2
+!
+interface FastEthernet0/22
+ switchport trunk native vlan 99
+ spanning-tree vlan 10 cost 1
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan15
+ ip address 192.168.5.130 255.255.255.248
+!
+ip default-gateway 192.168.5.129
+!
+banner motd "Unauthorized access is not allowed."
+!
+!
+!
+line con 0
+ password br_core
+ logging synchronous
+ login
+ exec-timeout 5 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+!
+!
+!
+!
+end
+
